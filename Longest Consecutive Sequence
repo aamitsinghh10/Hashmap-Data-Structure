@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) 
+    {
+        unordered_set<int> s;
+        
+        for(int a:nums)//insert all elements in set
+        {
+            s.insert(a);
+        }
+        int longest=0;
+        for(int i:nums)
+        {
+            if(! s.count(i-1))//when element is not present in the set
+            {
+                int curr_num=i;//current number
+                int curr_len=1;//current length
+                
+                while(s.count(curr_num+1))//if one greater element is present in set increment length and move to one greater element
+                {
+                    curr_num+=1;
+                    curr_len+=1;
+                }
+                longest=max(longest,curr_len);//getting longest sequence
+            }
+            
+        }
+        return longest;
+    }
+};
